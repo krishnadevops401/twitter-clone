@@ -3,29 +3,26 @@ name: Deploy to AWS
 on:
   push:
     branches:
-      - master
+      - master  # Trigger the workflow when pushing to the master branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Specify the type of runner
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v3  # Checkout the code from your repository
 
     - name: Set up AWS CLI 
       uses: aws-actions/configure-aws-credentials@v2
-with:
-  profile: my-profile  # Replace with your profile name
-  aws-region: ap-south-1  # Replace with your region
-
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-south-1
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Use the AWS Access Key ID from GitHub Secrets
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Use the AWS Secret Access Key from GitHub Secrets
+        aws-region: ap-south-1  # Replace with your AWS region
+        # profile: my-profile  # Uncomment this line if you're using a named AWS profile
 
     - name: Deploy to AWS
       run: |
-        aws s3 sync dist/ s3://reshbuckets
+        aws s3 sync dist/ s3://reshbuckets  # Sync your files to the specified S3 bucket
 
 
