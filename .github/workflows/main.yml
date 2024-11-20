@@ -17,7 +17,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v2
 with:
   profile: my-profile  # Replace with your profile name
-  aws-region: us-east-1  # Replace with your region
+  aws-region: ap-south-1  # Replace with your region
 
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
